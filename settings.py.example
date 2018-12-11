@@ -1,3 +1,5 @@
-token =
+GITHUB_TOKEN =
 API_KEY =
 API_TOKEN =
+BOARD_ID =
+LIST_NAME =

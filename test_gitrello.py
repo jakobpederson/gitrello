@@ -13,7 +13,7 @@ logging.disable(logging.CRITICAL)
 class GitrelloTests(TestCase):
 
     def setUp(self):
-        g = github.Github(settings.token)
+        g = github.Github(settings.GITHUB_TOKEN)
         self.user = g.get_user()
         self.org = [x for x in self.user.get_orgs() if x.login == 'this-is-a-test-org'][0]
         self.repo_dict = {x.name: x for x in self.org.get_repos()}
@@ -98,7 +98,7 @@ class ChecklistTests(TestCase):
     @mock.patch('gitrello.Gitrello.name')
     def setUp(self, name):
         name.return_value = 'test'
-        g = github.Github(settings.token)
+        g = github.Github(settings.GITHUB_TOKEN)
         self.user = g.get_user()
         self.org = [x for x in self.user.get_orgs() if x.login == 'this-is-a-test-org'][0]
         self.repo_dict = {x.name: x for x in self.org.get_repos()}

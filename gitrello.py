@@ -24,7 +24,7 @@ class Gitrello():
         self.client = trello.TrelloClient(api_key=settings.API_KEY, token=settings.API_TOKEN)
         self.pull = pull
         self.board = board
-        self.trello_list = [x for x in self.board.open_lists() if x.name == 'open prs'][0]
+        self.trello_list = [x for x in self.board.open_lists() if x.name == settings.LIST_NAME][0]
         self.label = self.get_or_create_label()
         self.urls = self.get_commits()
 
@@ -59,7 +59,7 @@ class Gitrello():
         return url if url else None
 
     def name(self):
-        return 'Pull Request {}'.format(self.pull.number)
+        return 'Pull Request {} - {}'.format(self.pull.number, self.label.name)
 
     def create_card(self):
         name = self.name()
