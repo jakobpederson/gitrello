@@ -105,6 +105,6 @@ class Gitrello():
     def add_label(self, card):
         try:
             card.add_label(self.label)
-        except trello.exception.ResourceUnavailable:
+        except trello.exceptions.ResourceUnavailable:
             pass
         return card

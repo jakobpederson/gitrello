@@ -63,7 +63,7 @@ class GitrelloTests(TestCase):
 
     def test_card_is_created_with_correct_name_attachment_and_label(self):
         name = self.card.name
-        self.assertEqual('Pull Request 1', name)
+        self.assertEqual('Pull Request 1 - this_is_also_a_test', name)
         expected_urls = [
             'https://trello.com/c/cHZouqvS/5-wick',
             'https://trello.com/c/3ZTj2oNL/6-wick',
