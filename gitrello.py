@@ -77,8 +77,8 @@ class Gitrello():
         else:
             card = self.trello_list.add_card(name)
             card = self.add_checklists(card)
-        card.attach(name, url=self.pull.html_url)
-        self.add_label(card)
+            card.attach(name, url=self.pull.html_url)
+            self.add_label(card)
         card.fetch()
         return card
 
