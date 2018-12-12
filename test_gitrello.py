@@ -1,11 +1,12 @@
-from unittest import TestCase
-import mock
 import github
-import settings
-import trello
+import mock
 import logging
 import logging.config
+import trello
+from unittest import TestCase
+
 import gitrello
+import test_settings as settings
 
 logging.disable(logging.CRITICAL)
 
@@ -157,3 +158,19 @@ class ChecklistTests(TestCase):
             'https://www.what.com/x/y/z/': False
         }
         self.assertCountEqual(expected, result)
+
+    def test_create_card_does_not_create_new_cards_or_add_more_info_to_existing_cards_if_no_changes(self):
+        for card in self.board.open_cards():
+            card.delete()
+        card = self.gitrello.create_card()
+        self.assertEqual(1, len(self.board.open_cards()))
+        self.gitrello.create_card()
+        self.gitrello.create_card()
+        self.gitrello.create_card()
+        open_cards = self.board.open_cards()
+        test_card = open_cards[0]
+        test_card.fetch()
+        self.assertEqual(1, len(open_cards))
+        self.assertEqual(card.id, test_card.id)
+        self.assertCountEqual(card.attachments, test_card.attachments)
+        self.assertCountEqual(card.checklists, test_card.checklists)

@@ -1,3 +1,4 @@
 *.pyc
 *.test_x
 settings.py
+test_settings.py

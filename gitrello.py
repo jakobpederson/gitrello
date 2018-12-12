@@ -1,8 +1,9 @@
 import github
 import random
 import re
-import settings
 import trello
+
+import settings
 
 
 class Gitrello():
@@ -96,10 +97,7 @@ class Gitrello():
 
     def checklist_update(self, card, items, checklist):
         old_items = [x['name'] for x in items]
-        new_items = self.urls
-        for item in new_items:
-            if item not in old_items:
-                checklist.add_checklist_item(item)
+        [checklist.add_checklist_item(url) for url in self.urls if url not in old_items]
         return card
 
     def add_label(self, card):
